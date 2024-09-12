@@ -11,24 +11,27 @@ def buildCurve(a,b,p):
 curve = EllipticCurve()
 
 #Generate a random parameters of an elliptic curve
-a,b,p = curve.generateParameters()
+a,b,p = 1,1,5
 
 #Generate the results of the function
 result,qr,sr = buildCurve(a,b,p)
+
+#Get points of elliptic curve
+x = curve.getPoints(qr,result)
 
 
 print(f"a parameter: {a}, b parameter {b}, p number {p} \n")
 print(f"Results of Evualte a function x3 + ax +b mod p \n {result} \n")
 print(f"Quadratic Residues \n {qr} \n")
-print(f"Square roots \n *, {sr} \n")
-print(f"Total number of points: {len(sr)} ")
+print(f"Square roots \n {sr} \n")
+print(f"Points of Elliptic Curve:  \n * , {x} \n")
+print(f"Total number of points: {len(x)+1} ")
 
 
 file = open("ParametersofCurve.txt","w")
 file.write(f"a parameter: {a}, b parameter {b}, p number {p} \n\n")
-file.write('List of points \n'+"*, "+str(sr))
-file.write(f"\n\nTotal number of points: {len(sr)}")
-
+file.write('List of points \n'+"*, "+str(x))
+file.write(f"\n\nTotal number of points: {len(x)+1}")
 
 
 

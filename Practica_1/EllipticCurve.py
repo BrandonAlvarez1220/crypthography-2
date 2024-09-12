@@ -6,12 +6,12 @@ class EllipticCurve:
     # Function to get quadratic residues & SR
     def quadraticResidues(self, p):
 
-        qr = set()
+        qr = list()
         sr = {}
 
-        for i in range(1, p):
+        for i in range(0, p):
             res = pow(base=i, exp=2) % p
-            qr.add(res)
+            qr.append(res)
 
             if res not in sr:
                 sr[res] = [i]
@@ -25,7 +25,7 @@ class EllipticCurve:
 
         result = list()
 
-        for i in range(1, p):
+        for i in range(0, p):
             y = (pow(i, 3) + (a * i) + b) % p
             result.append(y)
 
@@ -50,3 +50,15 @@ class EllipticCurve:
 
         return a, b, p
 
+
+    def getPoints(self,qr,evaluate):
+
+        points = list()
+
+        for i, value in enumerate(evaluate):
+            for j,qrValue in enumerate(qr):
+
+                if value == qrValue:
+                    points.append([i,j])
+
+        return points
