@@ -27,7 +27,9 @@ print(f"Curva: x^3 +{a}x + {b} en Z{p}\n")
 print(f'Puntos de la curva:\n{points}')
 print(f'\n-P:\n{npoints}')
 
+curve.sumPoints(a,b,p,x1=0,y1=19,x2=39,y2=4)
 
-curve.sumPoints(a,b,p,4,3,4,3)
+
+
 
 

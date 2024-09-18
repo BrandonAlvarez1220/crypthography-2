@@ -4,16 +4,16 @@ from sympy import *
 
 class EllipticCurve:
 
-    def getPoints(self,qr,evaluate):
+    def getPoints(self,qr,evaluate,z=1):
 
         points = list()
-        points.append(["inf", "inf"])
+        points.append([0,1,0])
 
         for i, value in enumerate(evaluate):
             for j,qrValue in enumerate(qr):
 
                 if value == qrValue:
-                    points.append([i,j])
+                    points.append([i,j,z])
 
         return points
 
@@ -73,17 +73,17 @@ class EllipticCurve:
         else:
             return False
 
-    def negativePoints(self,qr,evaluate,p):
+    def negativePoints(self,qr,evaluate,p,z=1):
 
         points = list()
-        points.append(["inf","inf"])
+        points.append([0,1,0])
 
         for i, value in enumerate(evaluate):
             for j,qrValue in enumerate(qr):
 
                 if value == qrValue:
                     y = (j*-1) % p
-                    points.append([i, y])
+                    points.append([i, y,z])
 
         return points
 
@@ -100,10 +100,11 @@ class EllipticCurve:
             x += n
         return x
 
-    def doublingPoint(self,a,b,p,x1,y1):
+    def doublingPoint(self,a,b,p,x1,y1,z1=1):
 
-        if x1 == 'inf' or y1 == 'inf':
+        if x1 == 0 and y1 == 1 and z1 == 0:
             print('Es el punto al infinito:  (inf,inf)')
+            return
 
         if self.isPoint(a,b,p,x1,y1):
 
@@ -120,17 +121,22 @@ class EllipticCurve:
             print('El punto no pertenece a la curva')
 
 
-    def sumPoints(self,a,b,p,x1,y1,x2,y2):
+    def sumPoints(self,a,b,p,x1,y1,x2,y2,z1=1,z2=1):
+
+        #Special cases
+        if x1 == 0 and y1 == 1 and z1 == 0:
+            print(f'El resultado es de la suma es:  ({x2},{y2})')
+            return
+
+        elif x2 == 0 and y2 == 1 and z2 == 0:
+            print(f'El resultado es de la suma es:  ({x1},{y1})')
+            return
+
+        elif z1 == 0 and z2 == 0:
+            print(f'El resultado es el punto al infinito')
+            return
 
         if self.isPoint(a, b, p, x1, y1) and self.isPoint(a, b, p, x2, y2):
-
-            #Special cases
-            if x1 == 'inf' or y1 == 'inf':
-                print(f'El resultado es de la suma es:  ({x2},{y2})')
-
-            if x2 == 'inf' or y2 == 'inf':
-                print(f'El resultado es de la suma es:  ({x1},{y1})')
-
             if x1 == x2 and y1 == y2:
                 self.doublingPoint(a,b,p,x1,y1)
             else:
