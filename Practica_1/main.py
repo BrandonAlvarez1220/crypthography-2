@@ -11,7 +11,7 @@ def buildCurve(a,b,p):
 curve = EllipticCurve()
 
 #Generate a random parameters of an elliptic curve
-a,b,p = 1,1,5
+a,b,p = 1,10,11
 
 #Generate the results of the function
 result,qr,sr = buildCurve(a,b,p)

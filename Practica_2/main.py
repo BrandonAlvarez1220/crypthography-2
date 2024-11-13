@@ -11,7 +11,7 @@ def buildCurve(a,b,p):
 curve = EllipticCurve()
 
 #Generate a random parameters of an elliptic curve
-a, b, p = 1, 1, 5
+a, b, p = 1, 6, 11
 
 #Generate the results of the function
 result, qr, sr = buildCurve(a,b,p)
@@ -27,7 +27,11 @@ print(f"Curva: x^3 +{a}x + {b} en Z{p}\n")
 print(f'Puntos de la curva:\n{points}')
 print(f'\n-P:\n{npoints}')
 
-curve.sumPoints(a,b,p,x1=0,y1=19,x2=39,y2=4)
+curve.sumPoints(a,b,p,x1=3,y1=6,x2=10,y2=9)
+
+#curve.doublingPoint(a,b,p,10,9)
+
+
 
 
 
